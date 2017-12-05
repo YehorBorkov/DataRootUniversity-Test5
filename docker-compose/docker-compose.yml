@@ -1,0 +1,13 @@
+version: '3'
+services:
+  akka:
+    image: "monstradamuzz/hello-akka"
+  nginx:
+    image: "nginx"
+    ports:
+      - "80:80"
+    links: 
+      - "akka:hello-akka"
+    volumes:
+      - "~/dev/DataRootUniversity/DataRootUniversity-Test5/docker-compose/html:/usr/share/nginx/html:ro"
+      - "~/dev/DataRootUniversity/DataRootUniversity-Test5/docker-compose/config/default.conf:/etc/nginx/conf.d/default.conf:ro"
