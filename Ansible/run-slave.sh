@@ -1,0 +1,1 @@
+docker run -d --name ubuntu-s -v ~/dev/DataRootUniversity/DataRootUniversity-Test5/Ansible/slave-ssh-keys:/home/ansible/.ssh:rw ubuntu-slave # -v ~/dev/DataRootUniversity/DataRootUniversity-Test5/Ansible/slave-ssh-config:/etc/ssh:ro

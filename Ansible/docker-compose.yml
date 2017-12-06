@@ -1,0 +1,10 @@
+version: '3'
+services:
+  ansible-host:
+    build: "./host/"
+    links: 
+      - "ansible-slave:remote-server"
+  ansible-slave:
+    build: "./slave/"
+    volumes:
+      - "~/dev/DataRootUniversity/DataRootUniversity-Test5/Ansible/slave-config:/etc/ssh/:ro"

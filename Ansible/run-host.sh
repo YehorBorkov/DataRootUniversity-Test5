@@ -1,0 +1,1 @@
+docker run -it --name ubuntu-h -v ~/dev/DataRootUniversity/DataRootUniversity-Test5/Ansible/host-ssh-keys:/home/ansible/.ssh:rw --link ubuntu-s:remote-server ubuntu-host
