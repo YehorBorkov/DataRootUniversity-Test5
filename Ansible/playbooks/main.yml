@@ -1,0 +1,8 @@
+- hosts: remote
+  roles: 
+    - preconf
+    - git
+    - jdk
+    - sbt
+    - docker
+  tags: server-config

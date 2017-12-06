@@ -1,0 +1,19 @@
+- name: get useful stuff
+  apt:
+    name: $item
+    with-items:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+
+- name: Add Docker’s official GPG key
+  command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+- name: add docker repo
+  command: sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable edge"
+
+- name: get docker
+  apt:
+    name: docker-ce
+    update_cache: yes

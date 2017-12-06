@@ -1,0 +1,4 @@
+- name: install jdk
+  apt:
+    name: default-jdk
+    update_cache: yes

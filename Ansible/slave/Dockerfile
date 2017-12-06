@@ -2,19 +2,17 @@ FROM ubuntu
 
 RUN apt-get update
 
-RUN apt-get install --no-install-recommends -y software-properties-common && \
-	apt-get install --no-install-recommends -y nano && \
-    apt-get install --no-install-recommends -y ssh
+RUN apt-get install --no-install-recommends -y ssh
 
-RUN useradd -m ansible
-COPY /slave-ssh-config/sshd_config /etc/ssh/sshd_config 
+RUN mkdir /var/run/sshd
 
-WORKDIR /home/ansible
-RUN mkdir /home/ansible/.ssh
-RUN chown ansible:ansible .ssh
-RUN service ssh start
+RUN echo 'root:alpine' | chpasswd
+RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
-VOLUME /home/ansible/.ssh
+RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+
+ENV NOTVISIBLE "in users profile"
+RUN echo "export VISIBLE=now" >> /etc/profile
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
